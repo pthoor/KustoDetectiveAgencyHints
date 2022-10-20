@@ -23,13 +23,33 @@ https://detective.kusto.io/
 The rarest book is missing!
 ![](https://detective.kusto.io/img/questions/01-jy6th.png)
 
+```kusto
+
+```
+
 ## Challenge 2
 Election fraud?
 ![](https://detective.kusto.io/img/questions/02-syh7t.png)
 
+```kusto
+summarize by bin()
+```
+
+https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/binfunction?WT.mc_id=AZ-MVP-5004683
+
 ## Challenge 3
 Bank robbery
 ![](https://detective.kusto.io/img/questions/03-gb96s.png)
+
+```kusto
+summarize Timestamp
+arg_max()
+join
+```
+
+https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/arg-max-aggfunction?WT.mc_id=AZ-MVP-5004683
+
+https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/joinoperator?pivots=azuredataexplorer#join-flavors?WT.mc_id=AZ-MVP-5004683
 
 ## Challenge 4
 
