@@ -1,9 +1,9 @@
 # 🕵️ Kusto Detective Agency Hints
 This repo contains some additional hints to the existing ones in the game of Kusto Detective Agency 🕵️ 🔐
 
-![](https://detective.kusto.io/img/logo-inv.png)
+<img src="https://detective.kusto.io/img/logo-inv.png" width=25% height=25%>
 
-Kusto Detective Agency is an interactive big data contest with five different challenges. Here's the first instruction:
+Kusto Detective Agency is an interactive big data contest with five different challenges.
 
 > Welcome to the Kusto Detective Agency, rookie!
 
@@ -15,42 +15,98 @@ Kusto Detective Agency is an interactive big data contest with five different ch
 
 > The Lieutenant
 
-## Getting started and how to use Azure Data Explorer
-https://detective.kusto.io/
+[![Kusto](https://img.youtube.com/vi/BaW0qsxxYRc/hqdefault.jpg)](https://youtu.be/BaW0qsxxYRc)
 
+## Getting started and how to use Azure Data Explorer
+Visit to get all the instructions: https://detective.kusto.io/
+
+To create a free Kusto cluster, you need either a Microsoft account (MSA) or an Azure Active Directory (AAD) identity. 
+
+Create your cluster here: https://aka.ms/kustofree
+
+Copy the Cluster URI you need this as a part of the answer.
+
+After that we need to paste the below KQL script to ingest the data into a new table called Onboarding. Wait for 10 seconds for the script to complete. 
+
+```kusto
+.execute database script <|
+// Create table for the data
+.create-merge table Onboarding(Score:long)
+// Import data
+.ingest into table Onboarding ('https://kustodetectiveagency.blob.core.windows.net/onboarding/onboarding.csv.gz') with (ignoreFirstRecord=true)
+```
+
+Then calculate the sum of the "Score" column.
 
 ## Challenge 1
 The rarest book is missing!
-![](https://detective.kusto.io/img/questions/01-jy6th.png)
+
+<img src="https://detective.kusto.io/img/questions/01-jy6th.png" width=25% height=25%>
+
+In this challenge you must find the book that's missing. The book will be at one of the shelves.
+
+### Hint
+Look at the weights of the sheleves and books. 
+
+Take a look at the sum() function to learn more.
 
 ```kusto
-
+summarize sum() by
 ```
+
+[sum() function](https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/sum-aggfunction?WT.mc_id=AZ-MVP-5004683)
 
 ## Challenge 2
 Election fraud?
-![](https://detective.kusto.io/img/questions/02-syh7t.png)
+
+<img src="https://detective.kusto.io/img/questions/02-syh7t.png" width=25% height=25%>
+
+Poppy the Goldfish are not so nice as you can think. In this challenge you need to prove that it has been a voting fraud and correct the numbers.
 
 ```kusto
-summarize by bin()
+// Query that counts the votes (with fraud):
+Votes
+| summarize Count=count() by vote
+| as hint.materialized=true T
+| extend Total = toscalar(T | summarize sum(Count))
+| project vote, Percentage = round(Count*100.0 / Total, 1), Count
+| order by Count
 ```
 
-https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/binfunction?WT.mc_id=AZ-MVP-5004683
+### Hint
+Look at only Poppy's votes to get a feeling how the voting was and how he could get 2,601,570 votes. Sounds fishy! 🐠
+Are the timing strange for each vote per IP address?
+
+```kusto
+summarize count() by bin()
+```
+
+[bin() function](https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/binfunction?WT.mc_id=AZ-MVP-5004683)
 
 ## Challenge 3
 Bank robbery
-![](https://detective.kusto.io/img/questions/03-gb96s.png)
+
+<img src="https://detective.kusto.io/img/questions/03-gb96s.png" width=25% height=25%>
+
+Now you need to think like a robber, yeah I know, not so easy perhaps. 
+
+### Hint
+Look at the time when the robbers left the bank and expand your search to nearby Avenue and Streets, they did not left in the same car, nor at the same time. They for sure gathered at one place in the end, but arrivied at different times.
+
+Look at the between() and arg_max() function to learn more.
 
 ```kusto
-summarize Timestamp
+where Timestamp between()
 arg_max()
 join
 ```
 
-https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/arg-max-aggfunction?WT.mc_id=AZ-MVP-5004683
+[arg_max() function](https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/arg-max-aggfunction?WT.mc_id=AZ-MVP-5004683)
 
-https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/joinoperator?pivots=azuredataexplorer#join-flavors?WT.mc_id=AZ-MVP-5004683
+[join](https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/joinoperator?pivots=azuredataexplorer#join-flavors?WT.mc_id=AZ-MVP-5004683)
 
 ## Challenge 4
+To be released
 
 ## Challenge 5
+To be released
