@@ -38,8 +38,7 @@ After that we need to paste the below KQL script to ingest the data into a new t
 
 Then calculate the sum of the "Score" column.
 
-## Challenge 1
-The rarest book is missing!
+## Challenge 1 - The rarest book is missing!
 
 <img src="https://detective.kusto.io/img/questions/01-jy6th.png" width=35% height=35%>
 
@@ -56,8 +55,7 @@ summarize sum() by
 
 [sum() function](https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/sum-aggfunction?WT.mc_id=AZ-MVP-5004683)
 
-## Challenge 2
-Election fraud?
+## Challenge 2 - Election fraud?
 
 <img src="https://detective.kusto.io/img/questions/02-syh7t.png" width=35% height=35%>
 
@@ -83,8 +81,7 @@ summarize count() by bin()
 
 [bin() function](https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/binfunction?WT.mc_id=AZ-MVP-5004683)
 
-## Challenge 3
-Bank robbery
+## Challenge 3 - Bank robbery
 
 <img src="https://detective.kusto.io/img/questions/03-gb96s.png" width=35% height=35%>
 
