@@ -1,7 +1,7 @@
 # 🕵️ Kusto Detective Agency Hints
 This repo contains some additional hints to the existing ones in the game of Kusto Detective Agency 🕵️ 🔐
 
-<img src="https://detective.kusto.io/img/logo-inv.png" width=25% height=25%>
+<img src="https://detective.kusto.io/img/logo-inv.png" width=35% height=35%>
 
 Kusto Detective Agency is an interactive big data contest with five different challenges.
 
@@ -41,7 +41,7 @@ Then calculate the sum of the "Score" column.
 ## Challenge 1
 The rarest book is missing!
 
-<img src="https://detective.kusto.io/img/questions/01-jy6th.png" width=25% height=25%>
+<img src="https://detective.kusto.io/img/questions/01-jy6th.png" width=35% height=35%>
 
 In this challenge you must find the book that's missing. The book will be at one of the shelves.
 
@@ -59,7 +59,7 @@ summarize sum() by
 ## Challenge 2
 Election fraud?
 
-<img src="https://detective.kusto.io/img/questions/02-syh7t.png" width=25% height=25%>
+<img src="https://detective.kusto.io/img/questions/02-syh7t.png" width=35% height=35%>
 
 Poppy the Goldfish are not so nice as you can think. In this challenge you need to prove that it has been a voting fraud and correct the numbers.
 
@@ -86,7 +86,7 @@ summarize count() by bin()
 ## Challenge 3
 Bank robbery
 
-<img src="https://detective.kusto.io/img/questions/03-gb96s.png" width=25% height=25%>
+<img src="https://detective.kusto.io/img/questions/03-gb96s.png" width=35% height=35%>
 
 Now you need to think like a robber, yeah I know, not so easy perhaps. 
 
@@ -106,7 +106,7 @@ join
 [join](https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/joinoperator?pivots=azuredataexplorer#join-flavors?WT.mc_id=AZ-MVP-5004683)
 
 ## Challenge 4
-To be released
+To be released - on October 30, 2022 (Sunday night) 00:00 UTC
 
 ## Challenge 5
-To be released
+To be released - on November 13, 2022 (Sunday night) 00:00 UTC
