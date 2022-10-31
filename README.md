@@ -102,8 +102,70 @@ join
 
 [join](https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/joinoperator?pivots=azuredataexplorer#join-flavors?WT.mc_id=AZ-MVP-5004683)
 
-## Challenge 4
-To be released - on October 30, 2022 (Sunday night) 00:00 UTC
+## Challenge 4 - Ready to play?
+
+<img src="https://detective.kusto.io/img/questions/04-pq5sd.png" width=35% height=35%>
+
+This challenge or case are divided into several parts. We need to first find a Special Prime Number, then go to a aka.ms page to get more data and hints to find the El Puente with some H3 cells (geospatial), get a Google Maps link, look around to find a key of some sort, correct the decrypt function so the message fit and then we are done!
+
+Start by grabbing Prime Numbers from
+https://kustodetectiveagency.blob.core.windows.net/prime-numbers/prime-numbers.csv.gz and educate yourself on Special Prime numbers (https://www.geeksforgeeks.org/special-prime-numbers), this should get you to
+https://aka.ms/{Largest_special_prime_under_100M}
+
+### Hint part 1 - Prime Numbers
+
+```kusto
+sort by <column>
+serialize
+prev() function
+```
+
+When you have the answer go then to aka.ms/ThatNumber
+
+In the hint at the aka.ms page you will then be instructed to find El Puente.
+
+> It's time to meet. Let's go for a virtual sTREEt tour... Across the Big Apple city, there is a special place with Turkish Hazelnut and four Schubert Chokecherries within 66-meters radius area. Go 'out' and look for me there, near the smallest American Linden tree (within the same area). Find me and the bottom line: my key message to you.
+
+### Hint part 2
+After you have imported the data as described in the aka.ms page, you will find two new functions. Decrypt will have the answer for you that you will insert into the detective.kusto.io site for this case. And the VirtualTourLink funktion will get you the Google Maps link that you need to find the hidden key.
+
+![image](https://user-images.githubusercontent.com/34333810/199028928-c793c6a5-75ab-4408-81a0-4a10ea06b12a.png)
+
+For me the KQL was very similiar to the Challenge (Case) 3.
+Look for the places as descibed in the text "there is a special place with Turkish Hazelnut and four Schubert Chokecherries within 66-meters radius area" - you will find that in the spc_common column.
+
+```kusto
+summarize count() by h3cell = geo_point_to_h3cell(longitude, latitude, 10)
+join kind=inner
+```
+
+At the end you will get the answer with:
+
+```kusto
+print h3cell = geo_h3cell_to_central_point("The_H3_Cell")
+```
+
+The answer from geo_h3cell_to_central_point will give you the Longitude and the Latitude. 
+Take the values and give it to the function VirtualTourLink(lat,lon) - this will give you a Google Maps Link.
+Now, look for the trees as stated in the Hints section at detective.kusto.io and find the key that you need to decode the encrypted message. It's hidden in the streets, not so low that's it's printed on the street and not so high as to the sky.
+
+Could be that the key are from a catchy song...
+
+Remember that the key are sensitive to spaces 🕵️
+
+### Hint part 3
+Now that you have the key, you will see that Data Explorer doesn't like the message.
+
+![image](https://user-images.githubusercontent.com/34333810/199035681-a41fff8c-8b09-4f72-bf71-10d1a2af2fae.png)
+
+First add "print" before Decrypt function.
+The message must be formatted correctly, see what you can do with the @-sign.
+
+```kusto
+print Decrypt(_message=..., _key=...)
+```
+
+When you have the message and the key right - congrats! Read the text from the output, grab the hint (be aware of trailing commas) and then you will have your badge 🌟
 
 ## Challenge 5
 To be released - on November 13, 2022 (Sunday night) 00:00 UTC
