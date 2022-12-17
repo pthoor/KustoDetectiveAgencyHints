@@ -168,4 +168,21 @@ print Decrypt(_message=..., _key=...)
 When you have the message and the key right - congrats! Read the text from the output, grab the hint (be aware of trailing commas) and then you will have your badge 🌟
 
 ## Challenge 5
-To be released - on November 13, 2022 (Sunday night) 00:00 UTC
+
+<img src="https://detective.kusto.io/img/questions/05-bhr5e.png" width=35% height=35%>
+
+Like challenge 4, this challenge has multiple steps to do to be able to get the answer. 
+Now we are looking for a heist date, as well as Longitude and Latitude for the heist. 
+
+After the import we have the table 'Chatlogs', start by taking 10 rows. 
+Chatlogs
+| take 10
+
+Now we see Timestamp and Message. We need to break down Message into several parts - with parse. 
+You need to find a specific channel that the gang are using, and take the bin() function with you - because the gang will not join the channel at the same time. 
+
+When you have found the channel and the usernames, take a look at their IP addresses, you should collect 4 IP addresses. 
+Use the hack tool provided in the Kusto Detective site and use the 4 IP addreses. You will see more clues, look at the pictures, the movie, the email and so on. 
+Look at the pictures metadata, are there any useful information? 
+
+Have you find the elephant and the geo location?
